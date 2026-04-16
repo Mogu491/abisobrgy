@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AbisoBrgy Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Inika:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Login.css" />
+</head>
+<body>
+  <header class="logo-header">
+    <img src="4b.png" alt="AbisoBrgy Logo" class="logo">
+    <h1 class="brand">AbisoBrgy</h1>
+  </header>
+
+  <div class="register-container">
+    <div class="overlay"></div>
+
+    <div class="register-header">
+      <h1 class="municipality">Bayan ng Pinit Ocampo</h1>
+      <img src="e0f80362-36dc-4690-b29a-a33e2d5d2600 (2).png" alt="Barangay Seal" class="seal">
+    </div>
+
+    <div class="register-box">
+      <div id="successMessage" class="success-message"></div>
+      <form id="registerForm" class="register-form">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" 
+               pattern="^09[0-9]{9}$" maxlength="11" required>
+
+        <label for="zone">Zone</label>
+        <input type="text" id="zone" name="zone" placeholder="Enter your zone" required>
+
+        <label for="type">Type</label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Select type</option>
+          <option value="resident">Resident</option>
+          <option value="official">Barangay Official</option>
+        </select>
+
+        <button type="submit" class="btn-register">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  const phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, ''); // remove letters and symbols
+  });
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const phone = phoneInput.value.trim();
+    const phoneRegex = /^09[0-9]{9}$/;
+
+    if (!phoneRegex.test(phone)) {
+      alert("Invalid phone number. Must start with 09 and be 11 digits.");
+      return;
+    }
+
+    const formData = new FormData(this);
+
+    fetch('save_registration.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.text())
+    .then(response => {
+      const successMessage = document.getElementById('successMessage');
+      if(response.trim() === "success") {
+        successMessage.textContent = "You're Now Registered. Thank You.";
+        successMessage.style.display = "block";
+
+        const zone = document.getElementById('zone').value;
+        const type = document.getElementById('type').value;
+
+        let registrations = JSON.parse(localStorage.getItem('registrations')) || { residents: [], officials: [] };
+        if (type === "resident") {
+          registrations.residents.push({ phone, zone, type });
+        } else if (type === "official") {
+          registrations.officials.push({ phone, zone, type });
+        }
+        localStorage.setItem('registrations', JSON.stringify(registrations));
+
+        this.reset();
+      } else {
+        successMessage.textContent = "Error: " + response;
+        successMessage.style.display = "block";
+      }
+    })
+    .catch(err => {
+      const successMessage = document.getElementById('successMessage');
+      successMessage.textContent = "Error connecting to server: " + err;
+      successMessage.style.display = "block";
+    });
+  });
+  </script>
+</body>
+</html>

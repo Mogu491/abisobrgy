@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AbisoBrgy Admin Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Inika:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="AdminLogin.css" />
+</head>
+<body>
+  <header class="logo-header">
+    <img src="4b.png" alt="AbisoBrgy Logo" class="logo">
+    <h1 class="brand">AbisoBrgy</h1>
+  </header>
+
+  <div class="login-container">
+    <div class="overlay"></div>
+
+    <div class="login-header">
+      <h1 class="municipality">Bayan Ng Pinit Ocampo</h1>
+      <h2 class="barangay">Barangay Pinit</h2>
+      <img src="e0f80362-36dc-4690-b29a-a33e2d5d2600 (2).png" alt="Barangay Seal" class="seal">
+    </div>
+
+    <div class="login-box">
+      <h3 class="admin-title">Admin Portal</h3>
+
+      <form class="login-form" id="loginForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); 
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if(email === "karftune@gmail.com" && password === "Dito3469") {
+        window.location.href = "Dashboard.html";
+      } else {
+        alert("Invalid email or password. Access denied.");
+      }
+    });
+  </script>
+
+</body>
+</html>

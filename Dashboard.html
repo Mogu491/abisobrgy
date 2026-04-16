@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AbisoBrgy Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Inika:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Dashboard.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h1 class="brand">Admin Portal</h1>
+  </header>
+
+  <main class="dashboard">
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3>Registered Residents</h3>
+          <p id="residentCount">0</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏛️</div>
+        <div class="stat-info">
+          <h3>Registered Officials</h3>
+          <p id="officialCount">0</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-info">
+          <h3>Population Forecast</h3>
+          <p>3,000</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="announcement">
+      <h2>Send Announcements</h2>
+      <form class="announcement-form" id="announcementForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter announcement title" required>
+        <label for="sendTo">Send To:</label>
+        <select id="sendTo" name="sendTo" required>
+          <option value="" disabled selected>Select audience</option>
+          <option value="residents">Residents</option>
+          <option value="officials">Barangay Officials</option>
+          <option value="all">All</option>
+        </select>
+        <div id="zoneContainer" style="display:none;">
+          <label for="zone">Select Zone:</label>
+          <select id="zone" name="zone">
+            <option value="" disabled selected>Select Zone</option>
+            <option value="Zone 1">Zone 1</option>
+            <option value="Zone 2">Zone 2</option>
+            <option value="Zone 3">Zone 3</option>
+            <option value="Zone 4A">Zone 4A</option>
+            <option value="Zone 4B">Zone 4B</option>
+            <option value="Zone 5">Zone 5</option>
+            <option value="Zone 6">Zone 6</option>
+          </select>
+        </div>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Type your announcement here..." required></textarea>
+        <div class="form-buttons">
+          <button type="submit" class="btn-primary">Send Announcement</button>
+          <button type="button" class="btn-secondary">Save as Draft</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="sidebar">
+      <h1>Barangay Officials</h1>
+      <div class="officials-list">
+        <div class="official-row">
+          <img src="Nel.jpg" alt="Official 1" class="official-icon">
+          <span class="official-name"><h2>Jonel Competente</h2> <br> <h2>-Brgy Captain</h2> </span>
+        </div>
+        <div class="official-row">
+          <img src="Ken.jpg" alt="Official 2" class="official-icon">
+          <span class="official-name"><h2>Kenjie Paulite</h2> <br> <h2>-BDRRMC Coordinator</h2> </span>
+        </div>
+        <div class="official-row">
+          <img src="Paul's.jpg" alt="Official 3" class="official-icon">
+          <span class="official-name"><h2>John Paul Alarcon</h2> <br> <h2>-Treasurer</h2> </span>
+        </div>
+        <div class="official-row">
+          <img src="Tin.jpg" alt="Official 4" class="official-icon">
+          <span class="official-name"><h2>Justine Seva</h2> <br> <h2>-Secretary</h2> </span>
+        </div>
+      </div>
+    </aside>
+
+    <section class="bottom">
+      <div class="recent">
+        <h3>Recent Announcements <a href="#" id="viewAllLink">View All</a></h3>
+        <ul id="announcementList"></ul>
+      </div>
+      
+     <div class="forecast">
+  <h3>Population Growth Forecast</h3>
+
+  <div id="csvUploadSection" style="margin:20px;">
+    <h3>Upload Population CSV</h3>
+    <form id="csvForm" enctype="multipart/form-data">
+      <input type="file" name="csvFile" accept=".csv" required>
+      <button type="submit">Upload</button>
+    </form>
+    <div id="uploadStatus"></div>
+  </div>
+
+  <div id="chartContainer" style="height:200px; width:100%;">
+    <canvas id="populationChart"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+<div id="forecastTable"></div>
+</body>
+</html>

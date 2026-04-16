@@ -1,0 +1,119 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  background: url('1b.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.logo-header {
+  position: absolute;
+  top: 8px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+.logo { width: 70px; }
+.brand {
+  font-family: 'Inika', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.login-header {
+  margin-top: 100px;
+  text-align: center;
+  color: #fff;
+}
+.municipality {
+  font-family: 'Inika', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #000;
+}
+.barangay {
+  font-size: 22px;
+  margin-top: 5px;
+}
+.seal {
+  width: 120px;
+  margin: -25px auto;
+  display: block;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+}
+
+.login-box {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.85);
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  width: 600px;
+  text-align: center;
+  margin-top: 30px; 
+  animation: fadeIn 1.2s ease-in-out;
+}
+.admin-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #2a1aff;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label {
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+input:focus { border-color: #2a1aff; }
+
+.btn-login {
+  margin-top: 10px;
+  background: #2a1aff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.btn-login:hover {
+  background: #000;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
